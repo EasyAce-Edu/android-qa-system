@@ -1,0 +1,46 @@
+{
+  "name": "easyace-wechat-api",
+  "description": "Restful nodejs api server for EasyAce Wechat QA system",
+  "version": "0.1.0",
+  "author": "Josh P. Cheng",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "engines": {
+    "node": "0.12.x"
+  },
+  "keywords": [
+    "expressjs",
+    "restful",
+    "api"
+  ],
+  "apidoc": {
+    "title": "API docs for EasyAce Restful Nodejs Wechat Api Server"
+  },
+  "dependencies": {
+    "agenda": "^0.6.26",
+    "agenda-ui": "0.0.6",
+    "async": "*",
+    "body-parser": "^1.6.3",
+    "compression": "^1.0.11",
+    "config": "^1.13.0",
+    "cors": "*",
+    "dropbox": "^0.10.3",
+    "express": "4.8.x",
+    "hbs": "^3.1.0",
+    "helmet": "^0.4.0",
+    "jsonwebtoken": "*",
+    "lodash": "^3.8.0",
+    "moment": "^2.10.3",
+    "mongoose": "^4.0.3",
+    "mongoose-timestamp": "^0.4.0",
+    "morgan": "*",
+    "newrelic": "^1.10.0",
+    "request": "^2.40.0",
+    "response-time": "^2.2.0",
+    "wechat-api": "^1.5.2"
+  }
+}
