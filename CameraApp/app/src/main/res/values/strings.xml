@@ -1,0 +1,10 @@
+ <resources>
+    <string name="app_name">CameraApp</string>
+
+    <string name="hello_world">Send Photo</string>
+    <string name="action_settings">Settings</string>
+    <string name="Button_Camera">Camera</string>
+    <string name="image_cd_camera">description</string>
+    <string name="pick_photo">Gallery</string>
+    <string name="title_activity_image_display">ImageDisplay</string>
+</resources>
