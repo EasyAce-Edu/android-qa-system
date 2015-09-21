@@ -43,6 +43,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startRecording() {
+        if (isRecording) {
+            return;
+        } else {
+            isRecording = true;
+        }
+
         popup.show();
 
         recorder.reset();
@@ -69,7 +75,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void endRecording() {
-        recorder.stop();
+        if (!isRecording) {
+            return;
+        }
+        try {
+            recorder.stop();
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "recorder stop", e);
+        }
 
 
         //get clip length
@@ -78,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.add(currentSoundClip);
         popup.dismiss();
+
+        isRecording = false;
     }
 
 
