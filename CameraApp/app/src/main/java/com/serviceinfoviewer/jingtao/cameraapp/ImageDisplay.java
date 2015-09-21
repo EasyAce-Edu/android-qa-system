@@ -16,7 +16,7 @@ public class ImageDisplay extends AppCompatActivity {
         setContentView(R.layout.activity_image_display);
         Intent intent = getIntent();
         Uri myUri = Uri.parse(intent.getStringExtra("uri"));
-        ImageView view = (ImageView)findViewById(R.id.image_view);
+        TouchImageView view = (TouchImageView)findViewById(R.id.image_view);
         view.setImageURI(myUri);
     }
 

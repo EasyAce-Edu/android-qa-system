@@ -7,9 +7,9 @@
     tools:context="com.serviceinfoviewer.jingtao.cameraapp.ImageDisplay">
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.serviceinfoviewer.jingtao.cameraapp.TouchImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/image_view"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
