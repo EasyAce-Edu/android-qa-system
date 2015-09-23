@@ -68,16 +68,18 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff">
-
-            <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="100dp">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/image_views"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"></LinearLayout>
+            <ImageView
+                android:id="@+id/add_icon"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:id="@+id/cameraButton"
-                android:src="@mipmap/ic_camera"
-                android:background="#ffffff" />
+                android:layout_marginLeft="10dp"/>
         </LinearLayout>
 
         <LinearLayout
