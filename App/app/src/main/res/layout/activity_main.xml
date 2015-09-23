@@ -87,13 +87,14 @@
             android:background="#ffffff"
             android:layout_gravity="center_horizontal">
 
-                <com.qa.appstudent.SoundView
-    				android:id="@+id/sound_view"
-    				android:layout_width="fill_parent"
-    				android:layout_height="wrap_content"
-        			android:orientation="horizontal"
-       				android:layout_gravity="bottom"
-        			android:layout_alignParentBottom="true" />
+            <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/btn_voice"
+                android:src="@mipmap/ic_voice"
+            android:background="#f0f0f5"
+            android:clickable="true" />
         </LinearLayout>
 
         <LinearLayout
