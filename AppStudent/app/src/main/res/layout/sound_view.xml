@@ -3,7 +3,10 @@
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
     	android:text="RECORD"
-    	android:id="@+id/btn_voice"
-    	android:layout_gravity="bottom"
-    	android:layout_alignParentBottom="true" />
+    	android:id="@+id/btn_voice" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DELETE"
+        android:id="@+id/btn_delete"/>
 </merge>
