@@ -72,6 +72,10 @@ public class SoundView extends LinearLayout {
 		timerRunnable = new Runnable() {
 			@Override
 			public void run() {
+				if (!isRecording) {
+					timerHandler.removeCallbacks(this);
+					return;
+				}
 				long currentTime = System.currentTimeMillis();
 				int lapsed = (int) ((currentTime - startTime) / 1000);
 				if (lapsed > MAX_DURATION) {
@@ -79,7 +83,7 @@ public class SoundView extends LinearLayout {
 					timerHandler.removeCallbacks(this);
 				} else {
 					String display = String.valueOf(MAX_DURATION - lapsed);
-					display += " seconds remaining...";
+					display += " seconds remaining, click to stop";
 					buttonVoice.setText(display);
 					timerHandler.postDelayed(this, TIMER_DELAY);
 				}
@@ -173,6 +177,12 @@ public class SoundView extends LinearLayout {
 	private boolean playRecording() {
 		if (player == null) {
 			player = new MediaPlayer();
+			player.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+				public void onCompletion(MediaPlayer mp) {
+					buttonVoice.setText("PLAY");
+					isPlaying = false;
+				}
+			});
 			try {
 				player.setDataSource(currentSoundClip.getPath());
 			} catch (Exception e) {
@@ -187,6 +197,7 @@ public class SoundView extends LinearLayout {
 			return false;
 		}
 
+		player.seekTo(0);
 		player.start();
 		buttonVoice.setText("STOP");
 		return true;
