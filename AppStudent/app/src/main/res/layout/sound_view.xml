@@ -1,0 +1,9 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:text="RECORD"
+    	android:id="@+id/btn_voice"
+    	android:layout_gravity="bottom"
+    	android:layout_alignParentBottom="true" />
+</merge>
