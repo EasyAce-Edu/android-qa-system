@@ -1,37 +1,37 @@
 # Built application files
-/*/build/
+AppStudent/*/build/
 
 # Crashlytics configuations
-com_crashlytics_export_strings.xml
+AppStudent/com_crashlytics_export_strings.xml
 
 # Local configuration file (sdk path, etc)
-local.properties
+AppStudent/local.properties
 
 # Gradle generated files
-.gradle/
+AppStudent/.gradle/
 
 # Signing files
-.signing/
+AppStudent/.signing/
 
 # User-specific configurations
-.idea/libraries/
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/.name
-.idea/compiler.xml
-.idea/copyright/profiles_settings.xml
-.idea/encodings.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/scopes/scope_settings.xml
-.idea/vcs.xml
-*.iml
+AppStudent/.idea/libraries/
+AppStudent/.idea/workspace.xml
+AppStudent/.idea/tasks.xml
+AppStudent/.idea/.name
+AppStudent/.idea/compiler.xml
+AppStudent/.idea/copyright/profiles_settings.xml
+AppStudent/.idea/encodings.xml
+AppStudent/.idea/misc.xml
+AppStudent/.idea/modules.xml
+AppStudent/.idea/scopes/scope_settings.xml
+AppStudent/.idea/vcs.xml
+AppStudent/*.iml
 
 # OS-specific files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+AppStudent/.DS_Store
+AppStudent/.DS_Store?
+AppStudent/._*
+AppStudent/.Spotlight-V100
+AppStudent/.Trashes
+AppStudent/ehthumbs.db
+AppStudent/Thumbs.db

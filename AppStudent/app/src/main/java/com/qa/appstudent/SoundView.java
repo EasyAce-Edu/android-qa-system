@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import android.os.Handler;
+
 import com.qa.appstudent.com.qa.appstudent.sound.SoundClip;
 
 import java.io.File;
@@ -29,6 +31,13 @@ public class SoundView extends LinearLayout {
 	private MediaRecorder recorder;
 	private MediaPlayer player;
 	private SoundClip currentSoundClip;
+
+
+	private Handler timerHandler;
+	private Runnable timerRunnable;
+	private long startTime;
+	private static final int MAX_DURATION = 60; //in seconds
+	private static final long TIMER_DELAY = 500; //in milliseconds
 
 
 	private Button buttonVoice;
@@ -58,6 +67,28 @@ public class SoundView extends LinearLayout {
 		if (!folder.exists()) {
 			folder.mkdir();
 		}
+
+		timerHandler = new Handler();
+		timerRunnable = new Runnable() {
+			@Override
+			public void run() {
+				if (!isRecording) {
+					timerHandler.removeCallbacks(this);
+					return;
+				}
+				long currentTime = System.currentTimeMillis();
+				int lapsed = (int) ((currentTime - startTime) / 1000);
+				if (lapsed > MAX_DURATION) {
+					stopRecording();
+					timerHandler.removeCallbacks(this);
+				} else {
+					String display = String.valueOf(MAX_DURATION - lapsed);
+					display += " seconds remaining, click to stop";
+					buttonVoice.setText(display);
+					timerHandler.postDelayed(this, TIMER_DELAY);
+				}
+			}
+		};
 	}
 	@Override
 	protected void onFinishInflate() {
@@ -121,6 +152,8 @@ public class SoundView extends LinearLayout {
 		}
 
 		buttonVoice.setText("STOP");
+		startTime = System.currentTimeMillis();
+		timerHandler.postDelayed(timerRunnable, 0);
 		return true;
 	}
 
@@ -144,15 +177,27 @@ public class SoundView extends LinearLayout {
 	private boolean playRecording() {
 		if (player == null) {
 			player = new MediaPlayer();
+			player.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+				public void onCompletion(MediaPlayer mp) {
+					buttonVoice.setText("PLAY");
+					isPlaying = false;
+				}
+			});
 			try {
 				player.setDataSource(currentSoundClip.getPath());
-				player.prepare();
 			} catch (Exception e) {
 				Log.e(ERROR_TAG, e.getMessage(), e);
 				return false;
 			}
 		}
+		try {
+			player.prepare();
+		} catch (Exception e) {
+			Log.e(ERROR_TAG, e.getMessage(), e);
+			return false;
+		}
 
+		player.seekTo(0);
 		player.start();
 		buttonVoice.setText("STOP");
 		return true;
