@@ -7,4 +7,5 @@
     <string name="image_cd_camera">description</string>
     <string name="pick_photo">Gallery</string>
     <string name="title_activity_image_display">ImageDisplay</string>
+    <string name="photo">Photo</string>
 </resources>
