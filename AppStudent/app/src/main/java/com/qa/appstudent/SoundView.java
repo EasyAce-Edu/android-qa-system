@@ -146,11 +146,16 @@ public class SoundView extends LinearLayout {
 			player = new MediaPlayer();
 			try {
 				player.setDataSource(currentSoundClip.getPath());
-				player.prepare();
 			} catch (Exception e) {
 				Log.e(ERROR_TAG, e.getMessage(), e);
 				return false;
 			}
+		}
+		try {
+			player.prepare();
+		} catch (Exception e) {
+			Log.e(ERROR_TAG, e.getMessage(), e);
+			return false;
 		}
 
 		player.start();
