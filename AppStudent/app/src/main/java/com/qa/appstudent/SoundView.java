@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 
 import com.qa.appstudent.com.qa.appstudent.sound.SoundClip;
 
+import java.io.File;
 import java.io.IOException;
 
 public class SoundView extends LinearLayout {
@@ -51,6 +52,12 @@ public class SoundView extends LinearLayout {
 
 		//get the button
 		buttonVoice = (Button)findViewById(R.id.btn_voice);
+
+		//create folder if it doesn't exist
+		File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), FOLDER_NAME);
+		if (!folder.exists()) {
+			folder.mkdir();
+		}
 	}
 	@Override
 	protected void onFinishInflate() {
@@ -102,6 +109,8 @@ public class SoundView extends LinearLayout {
 		String filePath = getPath(fileName);
 		currentSoundClip = new SoundClip(fileName, filePath, 0);
 		recorder.setOutputFile(filePath);
+
+
 
 		try {
 			recorder.prepare();
