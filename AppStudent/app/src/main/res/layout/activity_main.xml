@@ -1,19 +1,125 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:qa="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" tools:context=".MainActivity"
+    android:background="#F0F0F5"
+    android:baselineAligned="true">
 
 
+    <RelativeLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#ffffff">
 
-    <com.qa.appstudent.SoundView
-    	android:id="@+id/sound_view"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true" />
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/btn_back"
+            android:src="@mipmap/ic_back"
+            android:background="#ffffff" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Ask A Question"
+            android:id="@+id/tv_header"
+            android:textColor="#157efb" />
+
+        <Button
+            android:id="@+id/btn_select"
+            android:layout_width="55dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:text="Send"
+            android:background="#157efb"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subject"
+            android:id="@+id/btn_subject"
+            android:layout_gravity="center_horizontal"
+            android:background="#ffffff" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Please enter your question"
+            android:maxLength="140"
+            android:id="@+id/text"
+            android:layout_gravity="center_horizontal"
+            android:background="#ffffff" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+            <ImageButton
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/cameraButton"
+                android:src="@mipmap/ic_camera"
+                android:background="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="#ffffff"
+            android:layout_gravity="center_horizontal">
+
+                <com.qa.appstudent.SoundView
+    				android:id="@+id/sound_view"
+    				android:layout_width="fill_parent"
+    				android:layout_height="wrap_content"
+        			android:orientation="horizontal"
+       				android:layout_gravity="bottom"
+        			android:layout_alignParentBottom="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="1dp"
+                android:text="Hint"
+                android:id="@+id/btn_hint"
+                android:background="#FFFFFF" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="2dp"
+                android:text="Full Solution"
+                android:id="@+id/btn_fullSol"
+                android:background="#FFFFFF" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
