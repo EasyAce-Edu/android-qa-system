@@ -54,7 +54,48 @@ public class MainActivity extends AppCompatActivity  {
         CameraButton.setOnClickListener(CameraListener);
         Button GalleryButton=(Button)findViewById(R.id.gallery);
         GalleryButton.setOnClickListener(GalleryListener);
+        Button photo=(Button)findViewById(R.id.Photo);
+        ImageView add_icon=(ImageView)findViewById(R.id.add_icon);
+        //add_icon.setImageResource(R.drawable.ic);
+        photo.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startDialog();
+            }
+        });
     }
+
+    private void startDialog() {
+        AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(this);
+        myAlertDialog.setTitle("Upload Pictures Option");
+        myAlertDialog.setMessage("How do you want to set your picture?");
+
+        myAlertDialog.setPositiveButton("Gallery",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(pickPhoto, pickPicture);
+                    }
+                });
+
+        myAlertDialog.setNegativeButton("Camera",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                        String picname = "picture.jpg";
+                        File photo = new File(Environment.getExternalStoragePublicDirectory(
+                                Environment.DIRECTORY_PICTURES), picname);
+                        imageUri = Uri.fromFile(photo);
+                        Log.e(logtag, imageUri.toString());
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                        startActivityForResult(intent, TakePicture);
+                    }
+                });
+        myAlertDialog.show();
+    }
+
+
 
     private OnClickListener GalleryListener = new OnClickListener() {
         public void onClick(View v) {
@@ -81,9 +122,9 @@ public class MainActivity extends AppCompatActivity  {
         String picname="picture.jpg";
         File photo = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), picname);
-        if (!photo.mkdirs()) {
-            Log.e(logtag, "Directory not created");
-        }
+        //if (!photo.mkdirs()) {
+        //    Log.e(logtag, "Directory not created");
+        //}
         imageUri = Uri.fromFile(photo);
         Log.e(logtag,imageUri.toString());
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);

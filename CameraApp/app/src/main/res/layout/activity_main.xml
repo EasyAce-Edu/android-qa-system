@@ -15,6 +15,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
         <Button
+            android:id="@+id/Photo"
+            android:text="@string/photo"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <Button
             android:id="@+id/camera"
             android:text="@string/Button_Camera"
             android:layout_width="0dp"
@@ -27,6 +33,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
+
         </LinearLayout>
 
     <HorizontalScrollView
@@ -41,6 +48,10 @@
             android:id="@+id/image_views"
             android:layout_marginLeft = "10dp">
         </LinearLayout>
+        <ImageView
+            android:id="@+id/add_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </HorizontalScrollView>
 
