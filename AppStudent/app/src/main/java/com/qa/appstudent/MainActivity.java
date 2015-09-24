@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         });
         Button btn_send=(Button)findViewById(R.id.btn_send);
         btn_send.setOnClickListener(send_question);
+        Button btn = (Button) findViewById(R.id.btn_hint);
+        btn.setSelected(true);
     }
 
     private OnClickListener send_question=new OnClickListener() {
@@ -299,4 +301,34 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    public void changeColor(View view){
+        Button btn = (Button)view;
+        Button btn2;
+        btn.setSelected(true);
+        if(btn.getId() == R.id.btn_hint) {
+            btn2 = (Button) findViewById(R.id.btn_fullSol);
+        }
+        else {
+            btn2 = (Button) findViewById(R.id.btn_hint);
+        }
+        btn2.setSelected(false);
+        setColor(btn);
+        setColor(btn2);
+    }
+
+    private void setColor(Button btn){
+        if(btn.isSelected()) {
+            //Button btn = (Button)findViewById(R.id.btn_hint);
+            btn.setBackgroundColor(Color.parseColor("#157efb"));
+            btn.setTextColor(Color.parseColor("#ffffff"));
+            btn.setSelected(true);
+        }
+        else {
+            btn.setBackgroundColor(Color.parseColor("#ffffff"));
+            btn.setTextColor(Color.parseColor("#110000"));
+            btn.setSelected(false);
+        }
+    }
+
 }
