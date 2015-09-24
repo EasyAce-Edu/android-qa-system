@@ -42,6 +42,7 @@ import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.security.Key;
 import java.util.HashMap;
@@ -91,7 +92,25 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             for ( int key : URIs.keySet() ) {
                 Uri image_uri=URIs.get(key);
-                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), image_uri);
+                Bitmap bitmap;
+                String filename=key+".jpg";
+                FileOutputStream out = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), image_uri);
+                    out = new FileOutputStream(new File(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_PICTURES), filename));
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, out);
+                }catch(Exception e){
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (out != null) {
+                            out.close();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     };
