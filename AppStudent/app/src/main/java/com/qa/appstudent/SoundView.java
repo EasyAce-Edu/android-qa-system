@@ -5,11 +5,13 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.AttributeSet;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -24,7 +26,7 @@ public class SoundView extends LinearLayout {
 	private boolean isRecording = false;
 	private boolean isDoneRecording = false;
 	private boolean isPlaying = false;
-	private static final String FOLDER_NAME = "QA";
+	private static final String FOLDER_NAME = "QA/TEMP";
 	private static final String ERROR_TAG = "SOUND RECORDING ERROR";
 
 
@@ -41,6 +43,15 @@ public class SoundView extends LinearLayout {
 
 
 	private Button buttonVoice;
+	private Button buttonDelete;
+
+	public String getSoundClipPath() {
+		if (currentSoundClip == null) {
+			return null;
+		} else {
+			return currentSoundClip.getPath();
+		}
+	}
 
 	private String getPath(String name) {
 		String path = Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -61,12 +72,7 @@ public class SoundView extends LinearLayout {
 
 		//get the button
 		buttonVoice = (Button)findViewById(R.id.btn_voice);
-
-		//create folder if it doesn't exist
-		File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), FOLDER_NAME);
-		if (!folder.exists()) {
-			folder.mkdir();
-		}
+		buttonDelete = (Button)findViewById(R.id.btn_delete);
 
 		timerHandler = new Handler();
 		timerRunnable = new Runnable() {
@@ -93,6 +99,24 @@ public class SoundView extends LinearLayout {
 	@Override
 	protected void onFinishInflate() {
 		super.onFinishInflate();
+		buttonDelete.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				//try to delete sound clip
+				if (currentSoundClip != null) {
+					File source = new File(currentSoundClip.getPath());
+					if (source.exists()) {
+						source.delete();
+					}
+					//now reset everything
+					isPlaying = false;
+					isRecording = false;
+					isDoneRecording = false;
+					buttonVoice.setText("RECORD");
+					buttonDelete.setVisibility(GONE);
+				}
+			}
+		});
 		buttonVoice.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -127,6 +151,12 @@ public class SoundView extends LinearLayout {
 	}
 
 	private boolean startRecording() {
+		//create folder if it doesn't exist
+		File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), FOLDER_NAME);
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+
 		//try to record
 		if (recorder == null) {
 			recorder = new MediaRecorder();
@@ -171,26 +201,34 @@ public class SoundView extends LinearLayout {
 		MediaPlayer tempPlayer = MediaPlayer.create(this.getContext(), Uri.parse(currentSoundClip.getPath()));
 		currentSoundClip.setLength(tempPlayer.getDuration() / 1000);
 		buttonVoice.setText("PLAY");
+		buttonDelete.setVisibility(VISIBLE);
 		return true;
 	}
 
 	private boolean playRecording() {
 		if (player == null) {
 			player = new MediaPlayer();
-			player.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+			player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 				public void onCompletion(MediaPlayer mp) {
-					buttonVoice.setText("PLAY");
+					mp.stop();
+					if (isDoneRecording) {
+						buttonVoice.setText("PLAY");
+					} else {
+						buttonVoice.setText("RECORD");
+					}
 					isPlaying = false;
 				}
 			});
-			try {
-				player.setDataSource(currentSoundClip.getPath());
-			} catch (Exception e) {
-				Log.e(ERROR_TAG, e.getMessage(), e);
-				return false;
-			}
+			player.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+				public boolean onError(MediaPlayer mp, int what, int extra) {
+					mp.reset();
+					return true;
+				}
+			});
 		}
 		try {
+			player.reset();
+			player.setDataSource(currentSoundClip.getPath());
 			player.prepare();
 		} catch (Exception e) {
 			Log.e(ERROR_TAG, e.getMessage(), e);
