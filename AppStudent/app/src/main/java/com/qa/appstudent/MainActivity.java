@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
@@ -52,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     private Uri imageUri;
     private HashMap URIs=new HashMap();
     private int view_id=0;
+    private String selected_subject="undefined";
+    String[] subjects = new String[] {"Calculus", "Stat", "Computer Science","Linear Algebra"};
+    ArrayAdapter<String> adapter;
 
 
     @Override
@@ -61,6 +65,29 @@ public class MainActivity extends AppCompatActivity {
         ImageView add_icon=(ImageView)findViewById(R.id.add_icon);
         add_icon.setImageResource(R.mipmap.ic_camera);
         add_icon.setOnClickListener(upload_photo);
+        Button subject_btn=(Button)findViewById(R.id.select_subject);
+        adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, subjects);
+        subject_btn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subject_dialog();
+            }
+        });
+    }
+    private void subject_dialog(){
+        new AlertDialog.Builder(this)
+                .setTitle("Select A Subject")
+                .setAdapter(adapter, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        selected_subject=subjects[which];
+                        Button subject_btn=(Button)findViewById(R.id.select_subject);
+                        subject_btn.setText(selected_subject);
+                        dialog.dismiss();
+                    }
+                }).create().show();
     }
 
 
@@ -141,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, intent);
         LinearLayout ll = (LinearLayout)findViewById(R.id.image_views);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lp.setMargins(0, 0, 10, 0);
+        lp.setMargins(10, 0, 20, 0);
         switch (requestCode) {
             case 1://take picture
                 if (resultCode == Activity.RESULT_OK) {
@@ -156,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                     imageView.setOnClickListener(imageClickerListener);
                     try {
                         bitmap_large = MediaStore.Images.Media.getBitmap(cr, selectedImage);
-                        bitmap = Bitmap.createScaledBitmap(bitmap_large,400,400,true);
+                        bitmap = Bitmap.createScaledBitmap(bitmap_large,450,450,true);
                         imageView.setImageBitmap(bitmap);
                         imageView.setLayoutParams(lp);
                         /*LinearLayout layout = new LinearLayout(this);
@@ -234,19 +261,6 @@ public class MainActivity extends AppCompatActivity {
         check_image_limit();
     }
 
-    private OnClickListener DeleteImg = new OnClickListener(){
-        public void onClick(View v){
-            URIs.remove(v.getId());
-            ViewGroup parent = (ViewGroup) v.getParent();
-            parent.removeAllViews();
-            //TextView uri_text= (TextView)findViewById(R.id.uri_text);//DEBUG#####
-            //uri_text.setText(v.getId()+" removed \n"+URIs.toString());//DEBUG#####
-            check_image_limit();
-            //Log.e(logtag, "Delete clicked");
-            //Intent intent = new IntenDisplay_Imageay_Image.class);
-
-        }
-    };
     private OnClickListener imageClickerListener=new OnClickListener(){
         public void onClick(View v) {
             Intent display = new Intent(MainActivity.this, ImageDisplay.class);

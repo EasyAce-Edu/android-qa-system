@@ -9,4 +9,12 @@
     <string name="title_activity_image_display">ImageDisplay</string>
     <string name="photo">Photo</string>
     <string name="action_delete">Delete</string>
+    <string name="subject">subject</string>
+    <string-array name="subjects_array">
+        <item>Select A Subject</item>
+        <item>Calculus</item>
+        <item>Stat</item>
+        <item>Computer Science</item>
+        <item>Linear Algebra</item>
+    </string-array>
 </resources>

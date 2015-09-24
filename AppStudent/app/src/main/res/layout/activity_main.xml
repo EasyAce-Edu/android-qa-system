@@ -21,13 +21,13 @@
             android:src="@mipmap/ic_back"
             android:background="#ffffff" />
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Ask A Question"
-            android:id="@+id/tv_header"
-            android:textColor="#157efb" />
+            android:id="@+id/select_subject"
+            android:text="Subject"
+            android:textColor="#157efb"
+            android:layout_centerInParent="true"/>
 
         <Button
             android:id="@+id/btn_select"
@@ -48,28 +48,22 @@
         android:orientation="vertical"
         android:layout_gravity="center_horizontal">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Subject"
-            android:id="@+id/btn_subject"
-            android:layout_gravity="center_horizontal"
-            android:background="#ffffff" />
+
 
         <EditText
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="250dp"
             android:layout_marginTop="5dp"
             android:hint="Please enter your question"
             android:maxLength="140"
             android:id="@+id/text"
-            android:layout_gravity="center_horizontal"
+            android:gravity="fill_horizontal"
             android:background="#ffffff" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="100dp">
+            android:layout_height="110dp">
             <LinearLayout
                 android:orientation="horizontal"
                 android:id="@+id/image_views"
@@ -77,8 +71,8 @@
                 android:layout_height="match_parent"></LinearLayout>
             <ImageView
                 android:id="@+id/add_icon"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
                 android:layout_marginLeft="10dp"/>
         </LinearLayout>
 
