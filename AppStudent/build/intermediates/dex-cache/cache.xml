@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="/Users/shengyingpan/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="/Users/shengyingpan/Projects/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-bd4a595b73d362a41736b83d5663621e47d4d6c2.jar" />
-    </item>
-    <item
-        jar="/Users/shengyingpan/Projects/android-qa-system/AppStudent/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jar="/Users/shirley/android-qa-system/AppStudent/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="/Users/shengyingpan/Projects/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/classes-9ff94b68d697fbf02b186377fa39ffb8fa7b1ea9.jar" />
+        <dex dex="/Users/shirley/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/classes-5dc997c93b2e36b39d8643fbeb2ee22d672a1470.jar" />
     </item>
     <item
-        jar="/Users/shengyingpan/Projects/android-qa-system/AppStudent/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jar="/Users/shirley/android-qa-system/AppStudent/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="/Users/shengyingpan/Projects/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-30012b44009e4044afdd77fa9aa626562d4a2f66.jar" />
+        <dex dex="/Users/shirley/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-b5358a74af23370feff44a3697119388c37ca0ff.jar" />
     </item>
     <item
-        jar="/Users/shengyingpan/Projects/android-qa-system/AppStudent/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jar="/Users/shirley/android-qa-system/AppStudent/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="/Users/shengyingpan/Projects/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/classes-f878be0de60abf1af145949dd5980da0d4702d80.jar" />
+        <dex dex="/Users/shirley/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/classes-f753cdb760a95e0625a8f5904381c0dd96e16194.jar" />
+    </item>
+    <item
+        jar="/Users/shirley/android-sdks/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/shirley/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-75315e5b1f063dc62356ddf51233747265600623.jar" />
     </item>
 
 </items>
