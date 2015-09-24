@@ -1,6 +1,7 @@
 package com.qa.appstudent;
 
 import android.app.ActionBar;
+import android.renderscript.Sampler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -41,7 +42,12 @@ import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.net.URI;
+import java.security.Key;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -51,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private static int pickPicture = 2;
     private static int DisplayImage = 3;
     private Uri imageUri;
-    private HashMap URIs=new HashMap();
+    private HashMap<Integer, Uri>  URIs=new HashMap<Integer, Uri>();
     private int view_id=0;
     private String selected_subject="undefined";
     String[] subjects = new String[] {"Calculus", "Stat", "Computer Science","Linear Algebra"};
@@ -74,7 +80,20 @@ public class MainActivity extends AppCompatActivity {
                 subject_dialog();
             }
         });
+        Button btn_send=(Button)findViewById(R.id.btn_send);
+        btn_send.setOnClickListener(send_question);
     }
+
+    private OnClickListener send_question=new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            for ( int key : URIs.keySet() ) {
+                Uri image_uri=URIs.get(key);
+                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), image_uri);
+            }
+        }
+    };
+
     private void subject_dialog(){
         new AlertDialog.Builder(this)
                 .setTitle("Select A Subject")
@@ -150,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
                         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                        String picname = "picture.jpg";
+                        String picname = System.currentTimeMillis()+".jpg";
                         File photo = new File(Environment.getExternalStoragePublicDirectory(
                                 Environment.DIRECTORY_PICTURES), picname);
                         imageUri = Uri.fromFile(photo);
