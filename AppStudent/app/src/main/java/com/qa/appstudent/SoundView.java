@@ -200,14 +200,18 @@ public class SoundView extends LinearLayout {
 	private boolean playRecording() {
 		if (player == null) {
 			player = new MediaPlayer();
-			player.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+			player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 				public void onCompletion(MediaPlayer mp) {
 					mp.stop();
-					buttonVoice.setText("PLAY");
+					if (isDoneRecording) {
+						buttonVoice.setText("PLAY");
+					} else {
+						buttonVoice.setText("RECORD");
+					}
 					isPlaying = false;
 				}
 			});
-			player.setOnErrorListener(new MediaPlayer.OnErrorListener(){
+			player.setOnErrorListener(new MediaPlayer.OnErrorListener() {
 				public boolean onError(MediaPlayer mp, int what, int extra) {
 					mp.reset();
 					return true;

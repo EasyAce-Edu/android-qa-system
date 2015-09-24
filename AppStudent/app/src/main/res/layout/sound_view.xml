@@ -4,14 +4,14 @@
     <Button
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
-        android:layout_weight="4"
+        android:layout_weight="1"
     	android:text="RECORD"
     	android:id="@+id/btn_voice" />
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="DELETE"
+        android:layout_weight="9"
+        android:text="X"
         android:id="@+id/btn_delete"
         android:visibility="gone"
         />
