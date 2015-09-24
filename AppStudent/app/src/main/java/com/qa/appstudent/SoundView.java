@@ -26,7 +26,7 @@ public class SoundView extends LinearLayout {
 	private boolean isRecording = false;
 	private boolean isDoneRecording = false;
 	private boolean isPlaying = false;
-	private static final String FOLDER_NAME = "QA";
+	private static final String FOLDER_NAME = "QA/TEMP";
 	private static final String ERROR_TAG = "SOUND RECORDING ERROR";
 
 
@@ -44,6 +44,14 @@ public class SoundView extends LinearLayout {
 
 	private Button buttonVoice;
 	private Button buttonDelete;
+
+	public String getSoundClipPath() {
+		if (currentSoundClip == null) {
+			return null;
+		} else {
+			return currentSoundClip.getPath();
+		}
+	}
 
 	private String getPath(String name) {
 		String path = Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -146,7 +154,7 @@ public class SoundView extends LinearLayout {
 		//create folder if it doesn't exist
 		File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), FOLDER_NAME);
 		if (!folder.exists()) {
-			folder.mkdir();
+			folder.mkdirs();
 		}
 
 		//try to record
