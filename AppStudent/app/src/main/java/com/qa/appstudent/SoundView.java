@@ -213,6 +213,7 @@ public class SoundView extends LinearLayout {
 					mp.stop();
 					if (isDoneRecording) {
 						buttonVoice.setText("PLAY");
+						buttonDelete.setVisibility(VISIBLE);
 					} else {
 						buttonVoice.setText("RECORD");
 					}
@@ -238,6 +239,7 @@ public class SoundView extends LinearLayout {
 		player.seekTo(0);
 		player.start();
 		buttonVoice.setText("STOP");
+		buttonDelete.setVisibility(GONE);
 		return true;
 	}
 
@@ -249,6 +251,7 @@ public class SoundView extends LinearLayout {
 		}
 
 		buttonVoice.setText("PLAY");
+		buttonDelete.setVisibility(VISIBLE);
 		return true;
 	}
 }
