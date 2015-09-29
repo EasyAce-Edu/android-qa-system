@@ -26,7 +26,7 @@ public class SoundView extends LinearLayout {
 	private boolean isRecording = false;
 	private boolean isDoneRecording = false;
 	private boolean isPlaying = false;
-	private static final String FOLDER_NAME = "QA/TEMP";
+	private static final String FOLDER_NAME = "QA/SOUND";
 	private static final String ERROR_TAG = "SOUND RECORDING ERROR";
 
 

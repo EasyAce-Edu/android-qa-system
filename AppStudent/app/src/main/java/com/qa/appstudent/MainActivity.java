@@ -41,8 +41,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
 import java.security.Key;
 import java.util.HashMap;
@@ -52,6 +55,9 @@ import java.util.Set;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String FOLDER = "QA";
+    private static final String TEMP_FOLDER = "QA/TEMP";
 
     private static  String logtag = "CameraApp";
     private static int TakePicture = 1;
@@ -63,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
     private String selected_subject="undefined";
     String[] subjects = new String[] {"Calculus", "Stat", "Computer Science","Linear Algebra"};
     ArrayAdapter<String> adapter;
+
+    private SoundView soundView;
 
 
     @Override
@@ -85,20 +93,45 @@ public class MainActivity extends AppCompatActivity {
         btn_send.setOnClickListener(send_question);
         Button btn = (Button) findViewById(R.id.btn_hint);
         btn.setSelected(true);
+
+
+
+        //get soundView
+        soundView = (SoundView)findViewById(R.id.sound_view);
+    }
+
+    private void clearTempFolder() {
+        File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
+                TEMP_FOLDER);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+        if (folder.isDirectory()) {
+            for (File file : folder.listFiles()) {
+                file.delete();
+            }
+        }
     }
 
     private OnClickListener send_question=new OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            clearTempFolder();
+            String folderPath = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
+                    TEMP_FOLDER).getAbsolutePath();
+
+            //put files into temp folder
             for ( int key : URIs.keySet() ) {
                 Uri image_uri=URIs.get(key);
                 Bitmap bitmap;
-                String filename=key+".jpg";
+                //String filename=key+".jpg";
+                File imageFile = new File(folderPath, key + ".jpg");
+
                 FileOutputStream out = null;
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), image_uri);
-                    out = new FileOutputStream(new File(Environment.getExternalStoragePublicDirectory(
-                            Environment.DIRECTORY_PICTURES), filename));
+                    out = new FileOutputStream(imageFile);
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 30, out);
                 }catch(Exception e){
                     e.printStackTrace();
@@ -112,6 +145,30 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+
+            //put sound clip into temp folder
+            String target = new File(folderPath, "0.3gp").getAbsolutePath();
+            File from = new File(soundView.getSoundClipPath());
+            File to = new File(target);
+            try {
+                FileInputStream in = new FileInputStream(from);
+                FileOutputStream out = new FileOutputStream(to);
+
+                byte[] buffer = new byte[1024];
+                int read;
+                while((read = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, read);
+                }
+                in.close();
+                out.flush();
+                out.close();
+                to.delete();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            //now zip folderPath, upload zipped file to cloud
+            //and post question to server
         }
     };
 
