@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), image_uri);
                     out = new FileOutputStream(new File(Environment.getExternalStoragePublicDirectory(
                             Environment.DIRECTORY_PICTURES), filename));
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, out);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 30, out);
                 }catch(Exception e){
                     e.printStackTrace();
                 } finally {
