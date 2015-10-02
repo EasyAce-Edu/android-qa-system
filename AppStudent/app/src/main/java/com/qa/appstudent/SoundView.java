@@ -29,7 +29,6 @@ public class SoundView extends LinearLayout {
 	private static final String FOLDER_NAME = "QA/SOUND";
 	private static final String ERROR_TAG = "SOUND RECORDING ERROR";
 
-
 	private MediaRecorder recorder;
 	private MediaPlayer player;
 	private SoundClip currentSoundClip;
