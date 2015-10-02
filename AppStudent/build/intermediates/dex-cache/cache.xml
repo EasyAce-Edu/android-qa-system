@@ -2,32 +2,39 @@
 <items version="2" >
 
     <item
-        jar="/Users/shirley/android-qa-system/AppStudent/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jar="/Users/maoningguo/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3/5fc52c41ef0239d1093a1eb7c3697036183677ce/gson-2.3.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="/Users/shirley/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/classes-5dc997c93b2e36b39d8643fbeb2ee22d672a1470.jar" />
+        sha1="5fc52c41ef0239d1093a1eb7c3697036183677ce">
+        <dex dex="/Users/maoningguo/Documents/projects/NewAppPlace/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/gson-2.3-9ce16e52400109ab32ad914a80ea16528afacf77.jar" />
     </item>
     <item
-        jar="/Users/shirley/android-qa-system/AppStudent/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jar="/Users/maoningguo/.gradle/caches/modules-2/files-2.1/com.amazonaws/aws-android-sdk-s3/2.2.5/ecffe01b776b6635f9747e1dbee362a939c286de/aws-android-sdk-s3-2.2.5.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="/Users/shirley/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-b5358a74af23370feff44a3697119388c37ca0ff.jar" />
+        sha1="ecffe01b776b6635f9747e1dbee362a939c286de">
+        <dex dex="/Users/maoningguo/Documents/projects/NewAppPlace/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/aws-android-sdk-s3-2.2.5-73d88d976001ad7439279c5348511e044c339587.jar" />
     </item>
     <item
-        jar="/Users/shirley/android-qa-system/AppStudent/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jar="/Users/maoningguo/.gradle/caches/modules-2/files-2.1/com.amazonaws/aws-android-sdk-cognito/2.2.5/f06b5c3843a67eb763f2504caa43b9cf0fbf443a/aws-android-sdk-cognito-2.2.5.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="/Users/shirley/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/classes-f753cdb760a95e0625a8f5904381c0dd96e16194.jar" />
+        sha1="f06b5c3843a67eb763f2504caa43b9cf0fbf443a">
+        <dex dex="/Users/maoningguo/Documents/projects/NewAppPlace/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/aws-android-sdk-cognito-2.2.5-12c8109075e4e781078c7f82b9f132068ca2b413.jar" />
     </item>
     <item
-        jar="/Users/shirley/android-sdks/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jar="/Users/maoningguo/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient-android/4.3.5.1/eecbb0b998e77629862a13d957d552b3be58fc4e/httpclient-android-4.3.5.1.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="/Users/shirley/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-75315e5b1f063dc62356ddf51233747265600623.jar" />
+        sha1="eecbb0b998e77629862a13d957d552b3be58fc4e">
+        <dex dex="/Users/maoningguo/Documents/projects/NewAppPlace/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/httpclient-android-4.3.5.1-3297ce53f513fcde031a21828284349fdae5ef84.jar" />
+    </item>
+    <item
+        jar="/Users/maoningguo/.gradle/caches/modules-2/files-2.1/com.amazonaws/aws-android-sdk-core/2.2.5/af5dbe771d4895b85eb9e11210634091015feefd/aws-android-sdk-core-2.2.5.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="af5dbe771d4895b85eb9e11210634091015feefd">
+        <dex dex="/Users/maoningguo/Documents/projects/NewAppPlace/android-qa-system/AppStudent/app/build/intermediates/pre-dexed/debug/aws-android-sdk-core-2.2.5-69ceee476789dc6a3ec3b46036608ac267e5b0b8.jar" />
     </item>
 
 </items>

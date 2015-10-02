@@ -40,6 +40,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
+
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
+import com.qa.appstudent.data.Compressor;
+import com.qa.appstudent.network.HighLevelUploadService;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -48,6 +54,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.security.Key;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -148,9 +156,9 @@ public class MainActivity extends AppCompatActivity {
 
             //put sound clip into temp folder
             String target = new File(folderPath, "0.3gp").getAbsolutePath();
-            File from = new File(soundView.getSoundClipPath());
-            File to = new File(target);
             try {
+                File from = new File(soundView.getSoundClipPath());
+                File to = new File(target);
                 FileInputStream in = new FileInputStream(from);
                 FileOutputStream out = new FileOutputStream(to);
 
@@ -166,6 +174,27 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            File dir = new File(folderPath);
+            File[] directoryListing = dir.listFiles();
+            int size = directoryListing.length;
+            String[] filesPaths = new String[size];
+            int i = 0;
+            if (directoryListing != null) {
+                for (File child : directoryListing) {
+                    filesPaths[i] = child.getAbsolutePath();
+                    i++;
+                }
+            }
+            String finalPath = folderPath + "/zipfile.zip";
+            Compressor compressor = new Compressor(filesPaths,finalPath);
+            compressor.zip();
+
+            File uploadfile = new File(finalPath);
+            // initiate the upload
+            HighLevelUploadService highLevelUploadService = new HighLevelUploadService(getApplicationContext(),uploadfile,md5(uploadfile.getName()));
+            TransferObserver upload = highLevelUploadService.processS3Service();
+            TransferState state = upload.getState();
 
             //now zip folderPath, upload zipped file to cloud
             //and post question to server
@@ -404,6 +433,25 @@ public class MainActivity extends AppCompatActivity {
             btn.setBackgroundColor(Color.parseColor("#ffffff"));
             btn.setTextColor(Color.parseColor("#110000"));
             btn.setSelected(false);
+        }
+    }
+
+    private String md5(String s) {
+        try {
+            // create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // create Hex String
+            StringBuffer hexString = new StringBuffer();
+            for (int i=0; i<messageDigest.length; i++)
+                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
