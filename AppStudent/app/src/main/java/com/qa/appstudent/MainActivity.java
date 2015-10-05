@@ -61,6 +61,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import lombok.core.Main;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     private HashMap<Integer, Uri>  URIs=new HashMap<Integer, Uri>();
     private int view_id=0;
     private String selected_subject="undefined";
+    private String hint_type="undefined";
     String[] subjects = new String[] {"Calculus", "Stat", "Computer Science","Linear Algebra"};
     ArrayAdapter<String> adapter;
 
@@ -124,7 +127,13 @@ public class MainActivity extends AppCompatActivity {
     private OnClickListener send_question=new OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            if(selected_subject.equals("undefined")||hint_type.equals("undefined")){
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                alertDialog.setTitle("Cannot send question");
+                alertDialog.setMessage("Make sure your subject and hint/full sollution is selected");
+                alertDialog.show();
+                return;
+            }
             clearTempFolder();
             String folderPath = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
                     TEMP_FOLDER).getAbsolutePath();
@@ -300,7 +309,6 @@ public class MainActivity extends AppCompatActivity {
                 if (resultCode == Activity.RESULT_OK) {
                     Uri selectedImage = imageUri;
                     getContentResolver().notifyChange(selectedImage, null);
-                    //ImageView imageView = (ImageView) findViewById(R.id.image_camera);
                     ImageView imageView= new ImageView(this);
                     imageView.setAdjustViewBounds(true);
                     ContentResolver cr = getContentResolver();
@@ -312,24 +320,11 @@ public class MainActivity extends AppCompatActivity {
                         bitmap = Bitmap.createScaledBitmap(bitmap_large,450,450,true);
                         imageView.setImageBitmap(bitmap);
                         imageView.setLayoutParams(lp);
-                        /*LinearLayout layout = new LinearLayout(this);
-                        layout.setOrientation(LinearLayout.VERTICAL);
-                        layout.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-                        TextView titleView = new TextView(this);
-                        LayoutParams lparams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-                        titleView.setLayoutParams(lparams);
-                        titleView.setText("Delete ^");
-                        titleView.setOnClickListener(DeleteImg);
-                        titleView.setId(view_id);*/
                         imageView.setId(view_id);
                         URIs.put(view_id, selectedImage);
                         view_id++;
-                        /*layout.addView(imageView);
-                        layout.addView(titleView);*/
                         ll.addView(imageView);
                         Toast.makeText(MainActivity.this, selectedImage.toString(), Toast.LENGTH_LONG).show();
-                        //TextView uri_text= (TextView)findViewById(R.id.uri_text);//DEBUG#####
-                        //uri_text.setText(URIs.toString());//DEBUG#####
                     } catch (Exception e) {
                         Log.e(logtag, e.toString());
                     }
@@ -337,38 +332,21 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 2://pick from gellary
                 if(resultCode == RESULT_OK){
-                    //HorizontalScrollView ll=(HorizontalScrollView)findViewById(R.id.horizontalScrollView);
                     Uri selectedImage = intent.getData();
                     Bitmap bitmap;
                     Bitmap bitmap_large;
-                    //ImageView imageView = (ImageView) findViewById(R.id.image_camera);
                     try {
                         bitmap_large = MediaStore.Images.Media.getBitmap(this.getContentResolver(),selectedImage);
                         bitmap = Bitmap.createScaledBitmap(bitmap_large, 400, 400, true);
                         ImageView imageView= new ImageView(this);
                         imageView.setAdjustViewBounds(true);
-                        //imageView.setImageURI(selectedImage);
                         imageView.setImageBitmap(bitmap);
                         imageView.setLayoutParams(lp);
                         imageView.setOnClickListener(imageClickerListener);
-                        /*LinearLayout layout = new LinearLayout(this);
-                        layout.setOrientation(LinearLayout.VERTICAL);
-                        layout.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-                        TextView titleView = new TextView(this);
-                        LayoutParams lparams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-                        titleView.setLayoutParams(lparams);
-                        titleView.setText("Delete ^");
-                        titleView.setOnClickListener(DeleteImg);
-                        titleView.setId(view_id);*/
                         imageView.setId(view_id);
                         URIs.put(view_id, selectedImage);
                         view_id++;
-                        /*layout.addView(imageView);
-                        layout.addView(titleView);*/
                         ll.addView(imageView);
-                        //TextView uri_text= (TextView)findViewById(R.id.uri_text);//DEBUG#####
-                        //uri_text.setText(URIs.toString());//DEBUG#####
-
                     } catch (Exception e) {
                         Log.e(logtag, e.toString());
                     }
@@ -413,9 +391,11 @@ public class MainActivity extends AppCompatActivity {
         btn.setSelected(true);
         if(btn.getId() == R.id.btn_hint) {
             btn2 = (Button) findViewById(R.id.btn_fullSol);
+            hint_type="2";
         }
         else {
             btn2 = (Button) findViewById(R.id.btn_hint);
+            hint_type="1";
         }
         btn2.setSelected(false);
         setColor(btn);
@@ -424,7 +404,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setColor(Button btn){
         if(btn.isSelected()) {
-            //Button btn = (Button)findViewById(R.id.btn_hint);
             btn.setBackgroundColor(Color.parseColor("#157efb"));
             btn.setTextColor(Color.parseColor("#ffffff"));
             btn.setSelected(true);
