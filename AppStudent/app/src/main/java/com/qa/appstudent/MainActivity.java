@@ -148,23 +148,25 @@ public class MainActivity extends AppCompatActivity {
 
             //put sound clip into temp folder
             String target = new File(folderPath, "0.3gp").getAbsolutePath();
-            File from = new File(soundView.getSoundClipPath());
-            File to = new File(target);
-            try {
-                FileInputStream in = new FileInputStream(from);
-                FileOutputStream out = new FileOutputStream(to);
+            if (soundView.getSoundClipPath() != null) {
+                File from = new File(soundView.getSoundClipPath());
+                File to = new File(target);
+                try {
+                    FileInputStream in = new FileInputStream(from);
+                    FileOutputStream out = new FileOutputStream(to);
 
-                byte[] buffer = new byte[1024];
-                int read;
-                while((read = in.read(buffer)) != -1) {
-                    out.write(buffer, 0, read);
+                    byte[] buffer = new byte[1024];
+                    int read;
+                    while ((read = in.read(buffer)) != -1) {
+                        out.write(buffer, 0, read);
+                    }
+                    in.close();
+                    out.flush();
+                    out.close();
+                    to.delete();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                in.close();
-                out.flush();
-                out.close();
-                to.delete();
-            } catch (Exception e) {
-                e.printStackTrace();
             }
 
             //now zip folderPath, upload zipped file to cloud
