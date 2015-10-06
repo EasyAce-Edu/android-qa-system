@@ -24,11 +24,13 @@ public class HighLevelUploadService {
     final Context context;
     final File file;
     final String hashId;
+    final Question questionSetting;
 
-    public HighLevelUploadService(Context context, File file, String hashId) {
+    public HighLevelUploadService(Context context, File file, String hashId, Question questionSetting) {
         this.context = context;
         this.file = file;
         this.hashId = hashId;
+        this.questionSetting = questionSetting;
     }
 
 
@@ -42,6 +44,8 @@ public class HighLevelUploadService {
         // Starts a download
         String name = file.getName();
 
+        
+
         final TransferObserver observer = transferManager.upload("testmaoninguo", this.hashId, file);
 
         observer.setTransferListener(new TransferListener() {
@@ -52,9 +56,11 @@ public class HighLevelUploadService {
                         Log.d("State:", "Id: " + hashId + ", " + "state: " + state.toString());
                 String s3Location = "https://s3.amazonaws.com/testmaoninguo/" + hashId;
                 if (state == TransferState.COMPLETED) {
-                    MessageDTO messageDTO = new MessageDTO("testText", s3Location);
-                    Question question = new Question("math", "testPerson", messageDTO);
-                    HttpService post = new HttpService("https://easyace-api-staging.herokuapp.com/questions", "POST", question);
+                    MessageDTO messagedto = new MessageDTO(questionSetting.getMessageDTO().getTextMsg(),s3Location);
+                    questionSetting.setMessageDTO(messagedto);
+                  //  MessageDTO messageDTO = new MessageDTO("testText", s3Location);
+                  //  Question question = new Question("math", "testPerson", messageDTO);
+                    HttpService post = new HttpService("https://easyace-api-staging.herokuapp.com/questions", "POST", questionSetting);
                     post.start();
                 }
 

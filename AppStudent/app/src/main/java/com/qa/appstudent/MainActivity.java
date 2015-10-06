@@ -34,6 +34,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,6 +45,8 @@ import android.widget.LinearLayout.LayoutParams;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.qa.appstudent.data.Compressor;
+import com.qa.appstudent.data.MessageDTO;
+import com.qa.appstudent.data.Question;
 import com.qa.appstudent.network.HighLevelUploadService;
 
 import java.io.File;
@@ -62,6 +65,7 @@ import java.util.Map;
 import java.util.Set;
 
 import lombok.core.Main;
+import android.provider.Settings.Secure;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -201,9 +205,18 @@ public class MainActivity extends AppCompatActivity {
 
             File uploadfile = new File(finalPath);
             // initiate the upload
-            HighLevelUploadService highLevelUploadService = new HighLevelUploadService(getApplicationContext(),uploadfile,md5(uploadfile.getName()));
+            String android_id = Secure.getString(getApplicationContext().getContentResolver(),
+                    Secure.ANDROID_ID);
+            MessageDTO messageDTO = new MessageDTO(((EditText)findViewById(R.id.text)).getText().toString(), "");
+            Question question = new Question(selected_subject,android_id,messageDTO);
+
+            HighLevelUploadService highLevelUploadService = new HighLevelUploadService(getApplicationContext(),uploadfile,md5(uploadfile.getName()),question);
             TransferObserver upload = highLevelUploadService.processS3Service();
             TransferState state = upload.getState();
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle("Uploading");
+            alertDialog.setMessage("Please wait");
+            alertDialog.show();
 
             //now zip folderPath, upload zipped file to cloud
             //and post question to server
