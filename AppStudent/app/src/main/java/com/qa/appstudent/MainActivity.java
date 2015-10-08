@@ -67,6 +67,8 @@ import java.util.Set;
 import lombok.core.Main;
 import android.provider.Settings.Secure;
 
+import org.joda.time.DateTime;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -210,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
             MessageDTO messageDTO = new MessageDTO(((EditText)findViewById(R.id.text)).getText().toString(), "");
             Question question = new Question(selected_subject,android_id,messageDTO);
 
-            HighLevelUploadService highLevelUploadService = new HighLevelUploadService(getApplicationContext(),uploadfile,md5(uploadfile.getName()),question);
+            HighLevelUploadService highLevelUploadService = new HighLevelUploadService(getApplicationContext(),uploadfile,md5(uploadfile.getName()+ DateTime.now().toString()),question);
             TransferObserver upload = highLevelUploadService.processS3Service();
             TransferState state = upload.getState();
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();

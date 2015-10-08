@@ -29,12 +29,13 @@ public class HttpService extends Thread {
     public void run() {
 
             try {
-
                         URL url = new URL( webUrl);
                         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                        //  urlConnection.setRequestMethod(request);
                         if (request == "POST") {
                             urlConnection.setDoOutput(true);
+                        }
+                        else {
+                            urlConnection.setRequestMethod(request);
                         }
                         urlConnection.setDoInput(true);
                         urlConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
